@@ -24,7 +24,6 @@
     </button>
   </div>
   <div class="suggestions" *ngIf="showSuggestions && suggestions.length > 0">
-    <!-- Suggestions attached to the search bar -->
     <div
       *ngFor="let suggestion of suggestions"
       (click)="selectSuggestion(suggestion)"

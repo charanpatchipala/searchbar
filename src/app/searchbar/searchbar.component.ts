@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-todolist',
-  templateUrl: './todolist.component.html',
-  styleUrls: ['./todolist.component.css'],
+  selector: 'app-searchbar',
+  templateUrl: './searchbar.component.html',
+  styleUrls: ['./searchbar.component.css'],
 })
-export class TodolistComponent {
+export class SearchbarComponent {
   searchQuery: string = '';
   isAscending: boolean = true;
   showSuggestions: boolean = false;

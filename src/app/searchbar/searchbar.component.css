@@ -1,8 +1,8 @@
 .container {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Make the container cover the full viewport height */
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
   }
 .search-input {
     display: flex;
@@ -27,7 +27,7 @@
     right: 20px;
   }
 
-  /* Style for the suggestions container */
+ 
 .suggestions {
     position: absolute;
     background-color: white;
@@ -39,7 +39,7 @@
     position: absolute;
     margin-top: 200px;
     z-index: 1;
-    /* top: 100%; /* Position the suggestions below the search bar 
+  /* top: 100%;
   left: 0;  */
   }
   
@@ -51,7 +51,7 @@
   
   }
   
-  /* Highlight suggestion on hover */
+ 
   .suggestion:hover {
     background-color: #f5f5f5;
   }

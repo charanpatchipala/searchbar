@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TodolistComponent } from './todolist/todolist.component';
 import { FormsModule } from '@angular/forms';
 import { SuggestionItemComponent } from './suggestion-item/suggestion-item.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+
 @NgModule({
-  declarations: [AppComponent, TodolistComponent, SuggestionItemComponent],
+  declarations: [AppComponent, SuggestionItemComponent, SearchbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
