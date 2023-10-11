@@ -1,0 +1,36 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
+
+<div class="container">
+  <div class="search-input">
+    <input
+      type="search"
+      class="search"
+      name="search"
+      [(ngModel)]="searchQuery"
+      placeholder="Search"
+      (input)="updateSuggestions()"
+    />
+    <button (click)="toggleDirection()" class="toggle-button">
+      <i
+        class="fa"
+        [ngClass]="{
+          'fa-arrow-up': !isAscending,
+          'fa-arrow-down': isAscending
+        }"
+      ></i>
+    </button>
+  </div>
+  <div class="suggestions" *ngIf="showSuggestions && suggestions.length > 0">
+    <!-- Suggestions attached to the search bar -->
+    <div
+      *ngFor="let suggestion of suggestions"
+      (click)="selectSuggestion(suggestion)"
+      class="suggestion"
+    >
+      {{ suggestion }}
+    </div>
+  </div>
+</div>

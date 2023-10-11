@@ -4,15 +4,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TodolistComponent } from './todolist/todolist.component';
+import { FormsModule } from '@angular/forms';
+import { SuggestionItemComponent } from './suggestion-item/suggestion-item.component';
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, TodolistComponent, SuggestionItemComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatInputModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule,
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
