@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SearchService } from '../search.service';
 
 @Component({
   selector: 'app-searchbar',
@@ -10,6 +11,9 @@ export class SearchbarComponent {
   isAscending: boolean = true;
   showSuggestions: boolean = false;
   suggestions: string[] = [];
+  searchResults: { [key: string]: string[] } = {};
+
+  constructor(private searchService: SearchService) {}
 
   toggleSuggestions() {
     this.showSuggestions = !this.showSuggestions;
@@ -25,11 +29,18 @@ export class SearchbarComponent {
         'Task 4',
         'Task 5',
       ].filter((task) =>
-        task.toLowerCase().includes(this.searchQuery.toLowerCase())
+        task.toLowerCase().trim().includes(this.searchQuery.toLowerCase())
       );
     } else {
       this.suggestions = []; // Clear suggestions if the search query is empty
     }
+    // Fetch individual search results for each suggestion
+    this.suggestions.forEach((suggestion) => {
+      this.searchService.fetchSearchResults(suggestion).subscribe((results) => {
+        // Store results in a map
+        this.searchResults[suggestion] = results;
+      });
+    });
   }
 
   toggleDirection() {
@@ -39,5 +50,11 @@ export class SearchbarComponent {
   selectSuggestion(suggestion: string) {
     this.searchQuery = suggestion;
     this.showSuggestions = false; // Hide suggestions after selecting one
+    this.suggestions.forEach((suggestion) => {
+      this.searchService.fetchSearchResults(suggestion).subscribe((results) => {
+        // Store results in a map
+        this.searchResults[suggestion] = results;
+      });
+    });
   }
 }

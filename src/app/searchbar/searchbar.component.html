@@ -32,4 +32,16 @@
       {{ suggestion }}
     </div>
   </div>
+  <div class="search-results">
+    <ng-container *ngFor="let suggestion of suggestions">
+      <div *ngIf="searchResults[suggestion]" class="result">
+        <div
+          *ngFor="let result of searchResults[suggestion]"
+          class="result-item"
+        >
+          {{ result }}
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
