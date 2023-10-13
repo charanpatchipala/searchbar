@@ -12,6 +12,7 @@
       [(ngModel)]="searchQuery"
       placeholder="Search"
       (input)="updateSuggestions()"
+      (input)="updateSearchQuery()"
     />
     <button (click)="toggleDirection()" class="toggle-button">
       <i
@@ -32,6 +33,7 @@
       {{ suggestion }}
     </div>
   </div>
+
   <div class="search-results">
     <ng-container *ngFor="let suggestion of suggestions">
       <div *ngIf="searchResults[suggestion]" class="result">

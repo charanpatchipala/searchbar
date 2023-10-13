@@ -6,6 +6,15 @@ import { BehaviorSubject, Observable, delay, of } from 'rxjs';
 })
 export class SearchService {
   private searchResultsSubject = new BehaviorSubject<string[]>([]);
+  private searchQuery: string = '';
+
+  getSearchQuery(): string {
+    return this.searchQuery;
+  }
+
+  setSearchQuery(query: string) {
+    this.searchQuery = query;
+  }
   searchResults$ = this.searchResultsSubject.asObservable();
   fetchSearchResults(query: string) {
     const searchResults = this.generateSearchResults(query);

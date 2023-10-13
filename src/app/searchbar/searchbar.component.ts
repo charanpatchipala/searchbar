@@ -12,8 +12,28 @@ export class SearchbarComponent {
   showSuggestions: boolean = false;
   suggestions: string[] = [];
   searchResults: { [key: string]: string[] } = {};
+  lastSelectedSuggestions: string[] = [];
 
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService) {
+    this.searchQuery = this.searchService.getSearchQuery();
+  }
+
+  updateSearchQuery() {
+    this.searchService.setSearchQuery(this.searchQuery);
+  }
+
+  ngOnInit() {
+    // Retrieve the last selected suggestions from local storage
+    // const lastSuggestionsJSON = localStorage.getItem('lastSelectedSuggestions');
+    // if (lastSuggestionsJSON) {
+    //   this.lastSelectedSuggestions = JSON.parse(lastSuggestionsJSON);
+    //   // Display the last selected suggestion if there is at least one
+    //   if (this.lastSelectedSuggestions.length > 0) {
+    //     this.searchQuery =
+    //       this.lastSelectedSuggestions[this.lastSelectedSuggestions.length - 1];
+    //   }
+    // }
+  }
 
   toggleSuggestions() {
     this.showSuggestions = !this.showSuggestions;
@@ -34,27 +54,47 @@ export class SearchbarComponent {
     } else {
       this.suggestions = []; // Clear suggestions if the search query is empty
     }
-    // Fetch individual search results for each suggestion
+    this.performSearch();
+  }
+
+  performSearch() {
     this.suggestions.forEach((suggestion) => {
       this.searchService.fetchSearchResults(suggestion).subscribe((results) => {
-        // Store results in a map
         this.searchResults[suggestion] = results;
       });
     });
   }
-
   toggleDirection() {
     this.isAscending = !this.isAscending;
     this.toggleSuggestions();
   }
   selectSuggestion(suggestion: string) {
+    this.searchService.setSearchQuery(suggestion);
     this.searchQuery = suggestion;
+
     this.showSuggestions = false; // Hide suggestions after selecting one
-    this.suggestions.forEach((suggestion) => {
-      this.searchService.fetchSearchResults(suggestion).subscribe((results) => {
-        // Store results in a map
-        this.searchResults[suggestion] = results;
-      });
-    });
+
+    this.updateSuggestions();
+
+    // this.lastSelectedSuggestions.push(suggestion);
+
+    // // Limit the list to a certain number of suggestions if needed
+    // // For example, to keep the last 5 suggestions:
+    // if (this.lastSelectedSuggestions.length > 5) {
+    //   this.lastSelectedSuggestions.shift();
+    // }
+
+    // // Save the list of last selected suggestions to local storage
+    // localStorage.setItem(
+    //   'lastSelectedSuggestions',
+    //   JSON.stringify(this.lastSelectedSuggestions)
+    // );
   }
+  // openSearchBar() {
+  //   if (this.lastSelectedSuggestions.length > 0) {
+  //     this.searchQuery =
+  //       this.lastSelectedSuggestions[this.lastSelectedSuggestions.length - 1];
+  //     this.showSuggestions = true;
+  //   }
+  // }
 }
