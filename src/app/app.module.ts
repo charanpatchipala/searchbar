@@ -11,9 +11,19 @@ import { FormsModule } from '@angular/forms';
 import { SuggestionItemComponent } from './suggestion-item/suggestion-item.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { FormComponent } from './form/form.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HeaderInterceptor } from './header.interceptor';
+import { ChildComponent } from './child/child.component';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, SuggestionItemComponent, SearchbarComponent, FormComponent],
+  declarations: [
+    AppComponent,
+    SuggestionItemComponent,
+    SearchbarComponent,
+    FormComponent,
+    ChildComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,8 +31,11 @@ import { FormComponent } from './form/form.component';
     MatFormFieldModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

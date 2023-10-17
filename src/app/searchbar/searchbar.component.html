@@ -47,3 +47,15 @@
     </ng-container>
   </div>
 </div>
+<!-- <div>
+  <ng-container *ngTemplateOutlet="myTemplate"></ng-container>
+</div> -->
+<div let login="true" *ngIf="login; else myTemplate">hi</div>
+<ng-template #myTemplate>
+  <p>Content to be projected into the child component</p>
+</ng-template>
+
+<app-child>
+  <p class="go">go hell</p>
+  <h1 class="he">🤣</h1>
+</app-child>

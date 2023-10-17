@@ -1,0 +1,36 @@
+<ng-content select=".he"></ng-content>
+<ng-content select=".go"></ng-content>
+
+<ng-container
+  *ngIf="showHeader; then headerTemplate; else defaultHeader"
+></ng-container>
+<ng-container
+  *ngIf="showFooter; then footerTemplate; else defaultFooter"
+></ng-container>
+
+<ng-template #headerTemplate>
+  <div class="header">
+    <h2>Header</h2>
+  </div>
+</ng-template>
+<ng-template #defaultHeader>
+  <div class="header">
+    <h2>Default Header</h2>
+  </div>
+</ng-template>
+
+<ng-template #footerTemplate>
+  <div class="footer">
+    <button>Close</button>
+  </div>
+</ng-template>
+<ng-template #defaultFooter>
+  <div class="footer">
+    <button>Default Close</button>
+  </div>
+</ng-template>
+<h1>Angular CORS App 😁</h1>
+<ng-container *ngIf="candyData">
+  <h2>Candy Type: {{ candyData.candy }}</h2>
+  <h2>Name: {{ candyData.name }}</h2>
+</ng-container>

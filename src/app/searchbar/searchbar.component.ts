@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { SearchService } from '../search.service';
 
 @Component({
@@ -13,10 +13,39 @@ export class SearchbarComponent {
   suggestions: string[] = [];
   searchResults: { [key: string]: string[] } = {};
   lastSelectedSuggestions: string[] = [];
-
+  login: boolean = true;
   constructor(private searchService: SearchService) {
     this.searchQuery = this.searchService.getSearchQuery();
   }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    // Handle keyboard events here, for example, closing suggestions on ESC key
+    if (event.key === 'Escape') {
+      this.showSuggestions = false;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: MouseEvent) {
+    if (this.showSuggestions) {
+      const target = event.target as Element;
+      console.log('Clicked element:', target);
+      console.log('Classes:', target.classList);
+      if (!target.classList.contains('suggestions')) {
+        this.showSuggestions = false;
+      }
+    }
+  }
+
+  // @HostListener('focusout', ['$event.target'])
+  // handleFocusOut(target: EventTarget) {
+  //   // Handle focusout event on the input element here
+  //   // For example, you can hide suggestions when focus leaves the input
+  //   if (!this.suggestions.includes(this.searchQuery)) {
+  //     this.showSuggestions = false;
+  //   }
+  // }
 
   updateSearchQuery() {
     this.searchService.setSearchQuery(this.searchQuery);
